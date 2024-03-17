@@ -1,0 +1,81 @@
+/* Main - Body etc*/
+body {
+    background-color: #e2e8f0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.mainContent {
+    margin-left: 15%;
+    margin-top: 5%;
+    margin-right: 10%;
+    display: grid;
+    grid-template-rows: 100px 50px 50px 300px;
+    
+}
+
+/*Large header*/
+.header {
+    grid-row: 1 / 2;
+}
+
+/*Small header with add button*/
+.smallHeaderRow {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    
+}
+.smallHeaderRow h3 {
+    grid-column: 1/2;
+}
+.smallHeaderRow button{
+    grid-column: 4/5;
+    height: 30px;
+    width: 40px;
+    justify-self: center;
+    align-self: center;
+}
+
+/* TaskTitles*/
+.taskTitles {
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    font-weight: bold;
+    color: #9ca3af;
+    border: 1px solid #9ca3af;
+    border-left: none;
+    border-right: none;
+
+}
+
+.taskTitle {
+    grid-column: 1 / 2;
+    align-self: center;
+    
+    
+}
+.doneTitle {
+    grid-column: 2 / 3;
+    border-left: 1px solid #9ca3af;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.dueTitle {
+    grid-column: 3 / 4;
+    border-left: 1px solid #9ca3af;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.priorityTitle {
+    grid-column: 4 / 5;
+    border-left: 1px solid #9ca3af;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
