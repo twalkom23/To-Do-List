@@ -88,3 +88,71 @@ body {
     justify-content: start;
 }
 
+/* Form*/
+label {
+    font-weight: bold;
+}
+legend {
+    font-weight: bold;
+}
+.formAddTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    
+}
+.addTaskForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30%;
+}
+.taskLabelDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 15px;
+}
+.taskLabelDiv input{ 
+    width: 150%;
+    height: 30px;
+}
+
+.dueDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 15px;
+}
+.dueDiv input {
+    height: 30px;
+    width: 35%;
+}
+
+.priorityDiv {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 15px;
+}
+.priorityDiv label {
+    padding-left: 20px;
+    font-weight: lighter;
+    
+}
+
+.notesDiv  {
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+    padding-bottom: 15px;
+}
+
+ .formButtonsDiv {
+    display: flex;
+    justify-content: space-between;
+ }
+
+
+
+
+

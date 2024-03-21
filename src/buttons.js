@@ -1,7 +1,8 @@
 
 export function addFormButtonDomManipulation() {
-    const mainToDoList = document.querySelector('.mainToDoList');
+    const formAddTask = document.querySelector('.formAddTask');
     let addTaskForm = document.createElement('form');
+    
     //task input
     let taskDiv = document.createElement('div');
     taskDiv.setAttribute('class', 'taskLabelDiv');
@@ -23,7 +24,7 @@ export function addFormButtonDomManipulation() {
     let due = document.createElement('input');
     dueLabel.setAttribute('for', 'due');
     dueLabel.textContent = 'Due: ';
-    due.setAttribute('type', 'text');
+    due.setAttribute('type', 'date');
     due.setAttribute('id', 'due');
     due.setAttribute('name', 'dueDate');
     dueDiv.appendChild(dueLabel);
@@ -34,10 +35,11 @@ export function addFormButtonDomManipulation() {
     let priorityDiv = document.createElement('div'); 
     let priorityHighDiv = document.createElement('div'); 
     let priorityMediumDiv = document.createElement('div'); 
-    let priorityLowDiv = document.createElement('div'); 
+    let priorityLowDiv = document.createElement('div');
+    priorityDiv.setAttribute('class', 'priorityDiv'); 
     
     let priorityLegend = document.createElement('legend');
-    priorityLegend.textContent = 'Priority'; 
+    priorityLegend.textContent = 'Priority: '; 
     priorityDiv.appendChild(priorityLegend);
     
     let highPriorityLabel = document.createElement('label');
@@ -46,7 +48,8 @@ export function addFormButtonDomManipulation() {
     highPriorityLabel.textContent = 'High';
     highPriority.setAttribute('type', 'radio');
     highPriority.setAttribute('id', 'highPriority');
-    highPriority.setAttribute('name', 'priority')
+    highPriority.setAttribute('name', 'priority');
+    highPriority.setAttribute('value', 'highPriority');
     priorityHighDiv.appendChild(highPriorityLabel);
     priorityHighDiv.appendChild(highPriority);
 
@@ -57,6 +60,7 @@ export function addFormButtonDomManipulation() {
     mediumPriority.setAttribute('type', 'radio');
     mediumPriority.setAttribute('id', 'mediumPriority');
     mediumPriority.setAttribute('name', 'priority')
+    mediumPriority.setAttribute('value', 'mediumPriority');
     priorityMediumDiv.appendChild(mediumPriorityLabel);
     priorityMediumDiv.appendChild(mediumPriority);
 
@@ -67,6 +71,7 @@ export function addFormButtonDomManipulation() {
     lowPriority.setAttribute('type', 'radio');
     lowPriority.setAttribute('id', 'lowPriority');
     lowPriority.setAttribute('name', 'priority')
+    lowPriority.setAttribute('value', 'lowPriority');
     priorityLowDiv.appendChild(lowPriorityLabel);
     priorityLowDiv.appendChild(lowPriority);
 
@@ -80,13 +85,14 @@ export function addFormButtonDomManipulation() {
     let notesDiv = document.createElement('div');
     notesDiv.setAttribute('class', 'notesDiv');
     let notesLabel = document.createElement('label');
-    let notes = document.createElement('input');
+    let notes = document.createElement('textarea');
     notesLabel.setAttribute('for', 'notes');
+    notesLabel.setAttribute('rows', '10');
     notesLabel.textContent = 'Notes: ';
     notes.setAttribute('type', 'text');
     notes.setAttribute('id', 'notes');
     notes.setAttribute('name', 'taskNotes');
-    notes.setAttribute('rows', '10');
+    
 
     notesDiv.appendChild(notesLabel);
     notesDiv.appendChild(notes);
@@ -98,15 +104,17 @@ export function addFormButtonDomManipulation() {
     let formCancelButton = document.createElement('button');
     formCancelButton.textContent = 'Cancel';
     let submitFormButton = document.createElement('button');
+    submitFormButton.setAttribute('class', 'submitFormButton');
     submitFormButton.setAttribute('type', 'submit');
     submitFormButton.textContent = 'Add Task';
 
-    formButtonsDiv.appendChild(formCancelButton);
     formButtonsDiv.appendChild(submitFormButton);
+    formButtonsDiv.appendChild(formCancelButton);
     addTaskForm.appendChild(formButtonsDiv);
 
 
+    formAddTask.appendChild(addTaskForm);
 
-    mainToDoList.appendChild(addTaskForm);
+
    
 }
