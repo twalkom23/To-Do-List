@@ -1,4 +1,6 @@
+import { TaskObject } from "./object";
 
+ 
 export function addFormButtonDomManipulation() {
     const formAddTask = document.querySelector('.formAddTask');
     let addTaskForm = document.createElement('form');
@@ -117,4 +119,28 @@ export function addFormButtonDomManipulation() {
 
 
    
+}
+
+export function submitFormButtonPressed() {
+            let priority;
+            let task = document.getElementById('task').value;
+            let due = document.getElementById('due').value;
+            let priorityChecker = document.querySelector('input[name="priority"]:checked').value;
+            let notesUpdate = document.getElementById('notes').value;
+
+            if (priorityChecker === 'highPriority') {
+                priority = 'High';
+            }
+            else if (priorityChecker === 'mediumPriority') {
+                priority = 'Medium';
+            }
+            else if (priorityChecker === 'lowPriority') {
+                priority = 'Low'
+            }
+            else { priority = null; }
+           
+            let createdTask = new TaskObject(task, due, priority, notesUpdate);
+            
+            
+            return createdTask;
 }

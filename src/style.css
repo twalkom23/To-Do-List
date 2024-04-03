@@ -86,6 +86,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: start;
+    
 }
 
 /* Form*/
@@ -151,6 +152,61 @@ legend {
     display: flex;
     justify-content: space-between;
  }
+
+ /* to do list form */
+ .mainToDoList {
+    margin-top: 0%;
+ }
+ .formAddTask {
+    display: grid;
+    grid-row: 4/5;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.3fr;
+ }
+
+.taskLog{
+    grid-column: 1 / 2;
+    
+}
+.doneLog {
+    grid-column: 2 / 3;
+}
+
+.dueLog {
+    grid-column: 3 / 4;
+}
+
+.priorityLog {
+    grid-column: 4 / 5;
+}
+
+.deleteLog {
+    grid-column: 5 / 6;
+}
+
+.taskLog div {
+    border: 1px black solid;
+    height: 50px;
+}
+
+.doneLog div {
+    border: 1px black solid;
+    height: 50px;
+}
+
+.dueLog div { 
+    border: 1px black solid;
+    height: 50px;
+}
+
+.priorityLog div {
+    border: 1px black solid;
+    height: 50px;
+}
+
+.deleteLog div {
+    border: 1px black solid;
+    height: 50px;
+}
 
 
 

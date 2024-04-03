@@ -1,44 +1,72 @@
 import './style.css';
-import { TaskObject } from './object';
-import { addFormButtonDomManipulation } from './buttons';
+import { addFormButtonDomManipulation, submitFormButtonPressed } from './buttons';
+import { taskDomAdd } from './TaskDomManipulation';
 
-const addTaskButton = document.querySelector('.addButton');
+
+let addTaskButton = document.querySelector('.addButton');
+let newTask;
+let taskList = [];
+let taskLog = document.querySelector('.taskLog');
+let dueLog = document.querySelector('.dueLog');
+let priorityLog = document.querySelector('.priorityLog');
+let deleteLog = document.querySelector('.deleteLog');
+
+
+
 
 
 
 //Brings up the add task form 
 addTaskButton.addEventListener('click', () => {
+    taskLog.innerHTML = '';
+    dueLog.innerHTML = '';
+    priorityLog.innerHTML = '';
+    deleteLog.innerHTML = '';
+
     addFormButtonDomManipulation(); //from button.js
     
+});
+
+    
+
     document.addEventListener('click', function(event) {
+        
+        //submits form
         if (event.target && event.target.classList.contains('submitFormButton')) {
-            let priority;
-            let task = document.getElementById('task').value;
-            let due = document.getElementById('due').value;
-            let priorityChecker = document.querySelector('input[name="priority"]:checked').value;
-            let notesUpdate = document.getElementById('notes').value;
 
-            if (priorityChecker === 'highPriority') {
-                priority = 'High';
-            }
-            else if (priorityChecker === 'mediumPriority') {
-                priority = 'Medium';
-            }
-            else if (priorityChecker === 'lowPriority') {
-                priority = 'Low'
-            }
-            else { priority = null; }
+            event.preventDefault();
+            
+            newTask = submitFormButtonPressed(); //from button.js
+            
+            taskList.push(newTask);
 
-            let task1 = new TaskObject(task, due, priority, notesUpdate);
+            
 
-            alert(task1.task);
-            alert(task1.dueDate);
-            alert(task1.priority);
-            alert(task1.notes);
+            let removeForm = document.querySelector('form');
+            removeForm.remove();
+
+            taskDomAdd(taskList);
+
+
+
             
         }
-    })
-})
+    });
+
+    document.addEventListener('click', function(event) {
+        
+        //submits form
+        if (event.target && event.target.classList.contains('formCancelButton')) {
+
+            console.log('cancel Button pressed');
+
+            
+        }
+    });
+
+
+
+
 
 
 

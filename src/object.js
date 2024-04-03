@@ -4,5 +4,6 @@ export function TaskObject(task, dueDate, priority, notes) {
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-}
+};
+
 
