@@ -18,6 +18,7 @@ let deleteLog = document.querySelector('.deleteLog');
 
 //Brings up the add task form 
 addTaskButton.addEventListener('click', () => {
+    addTaskButton.disabled = true;
     taskLog.innerHTML = '';
     dueLog.innerHTML = '';
     priorityLog.innerHTML = '';
@@ -30,6 +31,7 @@ addTaskButton.addEventListener('click', () => {
     
 
     document.addEventListener('click', function(event) {
+
         
         //submits form
         if (event.target && event.target.classList.contains('submitFormButton')) {
@@ -40,30 +42,25 @@ addTaskButton.addEventListener('click', () => {
             
             taskList.push(newTask);
 
-            
-
             let removeForm = document.querySelector('form');
             removeForm.remove();
 
             taskDomAdd(taskList);
+            addTaskButton.disabled = false;
 
+        }
+        else if (event.target && event.target.classList.contains('formCancelButton')) {
+            event.preventDefault();
+            let removeForm = document.querySelector('form');
+            removeForm.remove();
+            taskDomAdd(taskList);
+            addTaskButton.disabled = false;
 
-
-            
         }
     });
 
-    document.addEventListener('click', function(event) {
-        
-        //submits form
-        if (event.target && event.target.classList.contains('formCancelButton')) {
-
-            console.log('cancel Button pressed');
-
-            
-        }
-    });
-
+   
+          
 
 
 

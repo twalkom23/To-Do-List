@@ -19,6 +19,9 @@ export function addFormButtonDomManipulation() {
     taskDiv.appendChild(task);
     addTaskForm.appendChild(taskDiv);
 
+    //done Checkbox
+    
+
     //due date input
     let dueDiv = document.createElement('div');
     dueDiv.setAttribute('class', 'dueDiv');
@@ -104,6 +107,7 @@ export function addFormButtonDomManipulation() {
     let formButtonsDiv = document.createElement('div');
     formButtonsDiv.setAttribute('class', 'formButtonsDiv');
     let formCancelButton = document.createElement('button');
+    formCancelButton.setAttribute('class', 'formCancelButton');
     formCancelButton.textContent = 'Cancel';
     let submitFormButton = document.createElement('button');
     submitFormButton.setAttribute('class', 'submitFormButton');
