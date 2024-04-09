@@ -183,29 +183,9 @@ legend {
     grid-column: 5 / 6;
 }
 
-.taskLog div {
-    border: 1px black solid;
-    height: 50px;
-}
-
-.doneLog div {
-    border: 1px black solid;
-    height: 50px;
-}
-
-.dueLog div { 
-    border: 1px black solid;
-    height: 50px;
-}
-
-.priorityLog div {
-    border: 1px black solid;
-    height: 50px;
-}
-
-.deleteLog div {
-    border: 1px black solid;
-    height: 50px;
+.doneLog button {
+    display: flex;
+    flex-direction: column;
 }
 
 
