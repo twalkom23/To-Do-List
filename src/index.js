@@ -63,8 +63,7 @@ addTaskButton.addEventListener('click', () => {
         } //runs when button to toggle done or not is pressed.
         else if (event.target && event.target.classList.contains('doneButton')) {
 
-            let toggleButton = event.target.id;
-            let toggleButtonInt = Number(toggleButton);
+            let toggleButtonInt = Number(event.target.id);
             deleteTaskListHTML();
             if (taskList[toggleButtonInt].done === false) {
                 taskList[toggleButtonInt].done = true;
@@ -78,7 +77,12 @@ addTaskButton.addEventListener('click', () => {
             }
         }// Will delete a task when the delete button is pressed
         else if (event.target && event.target.classList.contains('deleteButton')) {
-            console.log('delete button pressed');
+            let deleteId = Number(event.target.id);
+            console.log(taskList);
+            taskList.splice(deleteId, 1);
+            console.log(taskList);
+            deleteTaskListHTML();
+            taskDomAdd(taskList);
         }
     });
 
