@@ -14,7 +14,9 @@ export function taskDomAdd (object) {
 
     
     for (let i = 0; i < object.length; i++) {
-        let taskInput = document.createElement('p');
+        let taskInput = document.createElement('button');
+        taskInput.setAttribute('class', 'moreInfoButton');
+        taskInput.setAttribute('id', [i]);
         taskInput.textContent = object[i].task;
         taskLog.appendChild(taskInput);
         

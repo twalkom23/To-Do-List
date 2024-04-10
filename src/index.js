@@ -3,7 +3,6 @@ import { addFormButtonDomManipulation, submitFormButtonPressed, toggleDoneButton
 import { taskDomAdd } from './TaskDomManipulation';
 
 
-
 let addTaskButton = document.querySelector('.addButton');
 let newTask;
 let taskList = [];
@@ -12,6 +11,8 @@ let doneLog = document.querySelector('.doneLog');
 let dueLog = document.querySelector('.dueLog');
 let priorityLog = document.querySelector('.priorityLog');
 let deleteLog = document.querySelector('.deleteLog');
+let taskPopUpContainer = document.querySelector('.taskPopUpContainer');
+let closeButton
 
 function deleteTaskListHTML() {
     taskLog.innerHTML = '';
@@ -78,11 +79,18 @@ addTaskButton.addEventListener('click', () => {
         }// Will delete a task when the delete button is pressed
         else if (event.target && event.target.classList.contains('deleteButton')) {
             let deleteId = Number(event.target.id);
-            console.log(taskList);
             taskList.splice(deleteId, 1);
-            console.log(taskList);
             deleteTaskListHTML();
             taskDomAdd(taskList);
+        }//will cause pop up window which displays all the info about the task
+        else if (event.target && event.target.classList.contains('moreInfoButton')) {
+            console.log(taskList[event.target.id]);
+            taskPopUpContainer.classList.toggle('show');
+
+        }//Closes the taskList button
+        else if (event.target && event.target.classList.contains('closeButton')) {
+            console.log('close button pressed');
+            taskPopUpContainer.classList.toggle('show');
         }
     });
 

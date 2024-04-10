@@ -187,6 +187,53 @@ legend {
     display: flex;
     flex-direction: column;
 }
+.taskLog button {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Pop up that displays more of the tasks info*/
+.taskPopUpContainer {
+    display: none;
+}
+.taskPopUpContainer.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.taskPopUpContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    height: 80%;
+}
+.popUpHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.closeButton {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+
+}
+
 
 
 
