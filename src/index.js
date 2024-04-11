@@ -1,6 +1,6 @@
 import './style.css';
 import { addFormButtonDomManipulation, submitFormButtonPressed, toggleDoneButton } from './buttons';
-import { taskDomAdd } from './TaskDomManipulation';
+import { popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 
 
 let addTaskButton = document.querySelector('.addButton');
@@ -84,12 +84,12 @@ addTaskButton.addEventListener('click', () => {
             taskDomAdd(taskList);
         }//will cause pop up window which displays all the info about the task
         else if (event.target && event.target.classList.contains('moreInfoButton')) {
-            console.log(taskList[event.target.id]);
             taskPopUpContainer.classList.toggle('show');
+            popUpTaskDomAdd(taskList[(Number(event.target.id))]);
 
         }//Closes the taskList button
         else if (event.target && event.target.classList.contains('closeButton')) {
-            console.log('close button pressed');
+            
             taskPopUpContainer.classList.toggle('show');
         }
     });

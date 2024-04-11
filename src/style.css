@@ -220,8 +220,8 @@ legend {
 }
 .popUpHeader {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: end;
+    
 }
 .closeButton {
     width: 30px;
@@ -231,7 +231,9 @@ legend {
     border-radius: 50%;
     cursor: pointer;
     font-size: 20px;
-
+}
+.popUpTaskList {
+    padding-left: 5%;
 }
 
 
