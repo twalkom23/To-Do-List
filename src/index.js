@@ -6,13 +6,17 @@ import { popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 let addTaskButton = document.querySelector('.addButton');
 let newTask;
 let taskList = [];
+let taskListFromStorage = [];
 let taskLog = document.querySelector('.taskLog');
 let doneLog = document.querySelector('.doneLog');
 let dueLog = document.querySelector('.dueLog');
 let priorityLog = document.querySelector('.priorityLog');
 let deleteLog = document.querySelector('.deleteLog');
 let taskPopUpContainer = document.querySelector('.taskPopUpContainer');
-let closeButton
+
+taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+
+taskDomAdd(taskListFromStorage);
 
 function deleteTaskListHTML() {
     taskLog.innerHTML = '';
@@ -44,13 +48,18 @@ addTaskButton.addEventListener('click', () => {
             event.preventDefault();
             
             newTask = submitFormButtonPressed(); //from button.js
-            
-            taskList.push(newTask);
+            taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+            taskListFromStorage.push(newTask);
 
+            
+
+            
+           
             let removeForm = document.querySelector('form');
             removeForm.remove();
             
-            taskDomAdd(taskList);
+            taskDomAdd(taskListFromStorage);
+            localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
             addTaskButton.disabled = false;
 
         }//Runs when cancel button is selected
@@ -58,34 +67,42 @@ addTaskButton.addEventListener('click', () => {
             event.preventDefault();
             let removeForm = document.querySelector('form');
             removeForm.remove();
-            taskDomAdd(taskList);
+            taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+            taskDomAdd(taskListFromStorage);
             addTaskButton.disabled = false;
 
         } //runs when button to toggle done or not is pressed.
         else if (event.target && event.target.classList.contains('doneButton')) {
-
+            taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
             let toggleButtonInt = Number(event.target.id);
             deleteTaskListHTML();
-            if (taskList[toggleButtonInt].done === false) {
-                taskList[toggleButtonInt].done = true;
+            if (taskListFromStorage[toggleButtonInt].done === false) {
+                taskListFromStorage[toggleButtonInt].done = true;
                 
-                taskDomAdd(taskList);
+                localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
+                taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+                taskDomAdd(taskListFromStorage);
             }
-            else if (taskList[toggleButtonInt].done === true) {
-                taskList[toggleButtonInt].done = false;
+            else if (taskListFromStorage[toggleButtonInt].done === true) {
+                taskListFromStorage[toggleButtonInt].done = false;
+                localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
                 
-                taskDomAdd(taskList);
+                taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+                taskDomAdd(taskListFromStorage);
             }
         }// Will delete a task when the delete button is pressed
         else if (event.target && event.target.classList.contains('deleteButton')) {
             let deleteId = Number(event.target.id);
-            taskList.splice(deleteId, 1);
+            taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+            taskListFromStorage.splice(deleteId, 1);
             deleteTaskListHTML();
-            taskDomAdd(taskList);
+            taskDomAdd(taskListFromStorage);
+            localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
         }//will cause pop up window which displays all the info about the task
         else if (event.target && event.target.classList.contains('moreInfoButton')) {
             taskPopUpContainer.classList.toggle('show');
-            popUpTaskDomAdd(taskList[(Number(event.target.id))]);
+            taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+            popUpTaskDomAdd(taskListFromStorage[(Number(event.target.id))]);
 
         }//Closes the taskList button
         else if (event.target && event.target.classList.contains('closeButton')) {
