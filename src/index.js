@@ -1,12 +1,14 @@
+import '@fortawesome/fontawesome-free/css/all.css';
 import './style.css';
 import { addFormButtonDomManipulation, submitFormButtonPressed, toggleDoneButton } from './buttons';
-import { popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
+import { editTaskDomAdd, popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 
 
 let addTaskButton = document.querySelector('.addButton');
 let newTask;
-let taskList = [];
+
 let taskListFromStorage = [];
+let editLog = document.querySelector('.editLog');
 let taskLog = document.querySelector('.taskLog');
 let doneLog = document.querySelector('.doneLog');
 let dueLog = document.querySelector('.dueLog');
@@ -19,6 +21,7 @@ taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
 taskDomAdd(taskListFromStorage);
 
 function deleteTaskListHTML() {
+    editLog.innerHTML = '';
     taskLog.innerHTML = '';
     doneLog.innerHTML = '';
     dueLog.innerHTML = '';
@@ -107,6 +110,11 @@ addTaskButton.addEventListener('click', () => {
         }//Closes the taskList button
         else if (event.target && event.target.classList.contains('closeButton')) {
             
+            taskPopUpContainer.classList.toggle('show');
+        }
+        else if (event.target && event.target.classList.contains('editButton')) {
+            console.log('inside edit button');
+            editTaskDomAdd();
             taskPopUpContainer.classList.toggle('show');
         }
     });

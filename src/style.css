@@ -1,34 +1,40 @@
 /* Main - Body etc*/
 body {
     background-color: #e2e8f0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
 }
 .mainContent {
-    margin-left: 15%;
-    margin-top: 5%;
-    margin-right: 10%;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
     display: grid;
     grid-template-rows: 100px 50px 50px 300px;
+
     
 }
 
 /*Large header*/
 .header {
     grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+    
 }
 
 /*Small header with add button*/
 .smallHeaderRow {
     grid-row: 2 / 3;
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 0.3fr 3fr 1fr 1fr 1fr;
     
 }
 .smallHeaderRow h3 {
-    grid-column: 1/2;
+    grid-column: 2/3;
 }
 .smallHeaderRow button{
-    grid-column: 4/5;
+    grid-column: 5/6;
     height: 30px;
     width: 40px;
     justify-self: center;
@@ -39,32 +45,44 @@ body {
 .taskTitles {
     grid-row: 3/4;
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr 0.3fr;
+    grid-template-columns: 0.3fr 3fr 1fr 1fr 1fr 0.3fr;
     font-weight: bold;
     color: #9ca3af;
-    border: 1px solid #9ca3af;
-    border-left: none;
-    border-right: none;
+    
 
 }
 
-.taskTitle {
+.editTitle {
     grid-column: 1 / 2;
-    align-self: center;
+    
+}
+
+.taskTitle {
+    grid-column: 2 / 3;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: 1px solid #9ca3af;
+    border-left: none;
+    border-right: none;
+ 
+
     
     
 }
 .doneTitle {
-    grid-column: 2 / 3;
-    border-left: 1px solid #9ca3af;
+    grid-column: 3 / 4;
+    border: 1px solid #9ca3af;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: start;
 }
 .dueTitle {
-    grid-column: 3 / 4;
-    border-left: 1px solid #9ca3af;
+    grid-column: 4 / 5;
+    border-top: 1px solid #9ca3af;
+    border-bottom: 1px solid #9ca3af;
     height: 100%;
     display: flex;
     align-items: center;
@@ -72,16 +90,18 @@ body {
 }
 
 .priorityTitle {
-    grid-column: 4 / 5;
-    border-left: 1px solid #9ca3af;
+    grid-column: 5 / 6;
+    border: 1px solid #9ca3af;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: start;
 }
 .deleteTitle {
-    grid-column: 5 / 6;
-    border-left: 1px solid #9ca3af;
+    grid-column: 6 / 7;
+    border: 1px solid #9ca3af;
+    border-left: none;
+    border-right: none;
     height: 100%;
     display: flex;
     align-items: center;
@@ -160,27 +180,33 @@ legend {
  .formAddTask {
     display: grid;
     grid-row: 4/5;
-    grid-template-columns: 3fr 1fr 1fr 1fr 0.3fr;
+    grid-template-columns: 0.3fr 3fr 1fr 1fr 1fr 0.3fr;
  }
-
-.taskLog{
+ .formAddTask form {
+    grid-column: 2 / 3;
+ }
+.editLog {
     grid-column: 1 / 2;
     
 }
-.doneLog {
+.taskLog{
     grid-column: 2 / 3;
+    
 }
-
-.dueLog {
+.doneLog {
     grid-column: 3 / 4;
 }
 
-.priorityLog {
+.dueLog {
     grid-column: 4 / 5;
 }
 
-.deleteLog {
+.priorityLog {
     grid-column: 5 / 6;
+}
+
+.deleteLog {
+    grid-column: 6 / 7;
 }
 
 .doneLog button {
@@ -190,6 +216,9 @@ legend {
 .taskLog button {
     display: flex;
     flex-direction: column;
+}
+#editPen { 
+    pointer-events:  none;
 }
 
 /*Pop up that displays more of the tasks info*/

@@ -1,4 +1,4 @@
-
+const editLog = document.querySelector('.editLog');
 const taskLog = document.querySelector('.taskLog');
 const doneLog = document.querySelector('.doneLog');
 const dueLog = document.querySelector('.dueLog');
@@ -9,6 +9,12 @@ const popUpDue = document.querySelector('.popUpDue');
 const popUpPriority = document.querySelector('.popUpPriority');
 const popUpNotes = document.querySelector('.popUpNotes');
 
+function popUpTaskInnerHtml() {
+    popUpTask.innerHTML = '';
+    popUpDue.innerHTML = '';
+    popUpPriority.innerHTML = '';
+    popUpNotes.innerHTML = '';
+}
 
 
 
@@ -19,6 +25,16 @@ export function taskDomAdd (object) {
 
     
     for (let i = 0; i < object.length; i++) {
+
+        let editInput = document.createElement('button');
+        editInput.setAttribute('class', 'editButton');
+        editInput.setAttribute('id', [i]);
+        let editInputIcon = document.createElement('i');
+        editInputIcon.setAttribute('class', 'fas fa-pen');
+        editInputIcon.setAttribute('id', 'editPen');
+        editInput.appendChild(editInputIcon);
+        editLog.appendChild(editInput);
+
         let taskInput = document.createElement('button');
         taskInput.setAttribute('class', 'moreInfoButton');
         taskInput.setAttribute('id', [i]);
@@ -55,11 +71,7 @@ export function taskDomAdd (object) {
 }
 //populates the pop up with the task information that is clicked on
 export function popUpTaskDomAdd (object) {
-    popUpTask.innerHTML = '';
-    popUpDue.innerHTML = '';
-    popUpPriority.innerHTML = '';
-    popUpNotes.innerHTML = '';
-    console.log(object);
+    popUpTaskInnerHtml();
 
    let taskPopUpInputHeader = document.createElement('h1');
    taskPopUpInputHeader.textContent = 'Task';
@@ -88,4 +100,8 @@ export function popUpTaskDomAdd (object) {
    notesPopUpInput.textContent = object.notes;
    popUpNotes.appendChild(notesPopUpInputHeader);
    popUpNotes.appendChild(notesPopUpInput);
+}
+
+export function editTaskDomAdd() {
+    popUpTaskInnerHtml();
 }
