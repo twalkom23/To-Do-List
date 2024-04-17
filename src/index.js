@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import './style.css';
-import { addFormButtonDomManipulation, submitFormButtonPressed, toggleDoneButton } from './buttons';
+import { addFormButtonDomManipulation, submitFormButtonPressed, editTask } from './buttons';
 import { editTaskDomAdd, popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 
 
@@ -113,9 +113,9 @@ addTaskButton.addEventListener('click', () => {
             taskPopUpContainer.classList.toggle('show');
         }
         else if (event.target && event.target.classList.contains('editButton')) {
-            console.log('inside edit button');
-            editTaskDomAdd();
             taskPopUpContainer.classList.toggle('show');
+            let editId = Number(event.target.id);
+            editTask(editId);
         }
     });
 

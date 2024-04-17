@@ -9,16 +9,13 @@ const popUpDue = document.querySelector('.popUpDue');
 const popUpPriority = document.querySelector('.popUpPriority');
 const popUpNotes = document.querySelector('.popUpNotes');
 
-function popUpTaskInnerHtml() {
+
+export function popUpTaskInnerHtml() {
     popUpTask.innerHTML = '';
     popUpDue.innerHTML = '';
     popUpPriority.innerHTML = '';
     popUpNotes.innerHTML = '';
 }
-
-
-
-
 
 
 export function taskDomAdd (object) {
@@ -102,6 +99,3 @@ export function popUpTaskDomAdd (object) {
    popUpNotes.appendChild(notesPopUpInput);
 }
 
-export function editTaskDomAdd() {
-    popUpTaskInnerHtml();
-}

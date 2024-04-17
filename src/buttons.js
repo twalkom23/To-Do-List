@@ -1,4 +1,5 @@
 import { TaskObject } from "./object";
+import { popUpTaskInnerHtml } from "./TaskDomManipulation";
 
 
  
@@ -154,3 +155,142 @@ export function submitFormButtonPressed() {
             return createdTask;
 }
 
+export function editTask (numberId) {
+    popUpTaskInnerHtml();
+    let popUpTaskEditContainer = document.querySelector('.popUpTask');
+    let taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+    console.log(taskListFromStorage[numberId].notes);
+    let editTaskForm = document.createElement('form');
+
+    //edit task input
+    let editTaskDiv = document.createElement('div');
+    editTaskDiv.setAttribute('class', 'EditTaskLabelDiv');
+   
+    let editTaskLabel = document.createElement('label');
+    editTaskLabel.setAttribute('for', 'task' + numberId);
+    editTaskLabel.textContent = 'Task: ';
+
+    let editTaskInput = document.createElement('input');
+    editTaskInput.setAttribute('type', 'text');
+    editTaskInput.setAttribute('id', 'task' + numberId);
+    editTaskInput.setAttribute('name', 'editTaskVar');
+    editTaskInput.setAttribute('value', taskListFromStorage[numberId].task);
+
+    editTaskDiv.appendChild(editTaskLabel);
+    editTaskDiv.appendChild(editTaskInput);
+    editTaskForm.appendChild(editTaskDiv);
+
+
+
+    //edit due date 
+    let editDueDateDiv = document.createElement('div');
+    editDueDateDiv.setAttribute('class', 'editDueDateDiv');
+
+    let editDueDateLabel = document.createElement('label');
+    editDueDateLabel.setAttribute('for', 'date' + numberId);
+    editDueDateLabel.textContent = 'Due Date: ';
+
+    let editDueDateInput = document.createElement('input');
+    editDueDateInput.setAttribute('type', 'date');
+    editDueDateInput.setAttribute('id', 'date' + numberId);
+    editDueDateInput.setAttribute('name', 'editDueDateVar');
+    editDueDateInput.setAttribute('value', taskListFromStorage[numberId].dueDate);
+
+    editDueDateDiv.appendChild(editDueDateLabel);
+    editDueDateDiv.appendChild(editDueDateInput);
+    editTaskForm.appendChild(editDueDateDiv);
+
+
+
+    //edit priority 
+    let editPriorityDiv = document.createElement('div'); 
+    let editPriorityHighDiv = document.createElement('div'); 
+    let editPriorityMediumDiv = document.createElement('div'); 
+    let editPriorityLowDiv = document.createElement('div');
+    editPriorityDiv.setAttribute('class', 'editPriorityDiv'); 
+    let editPriorityLegend = document.createElement('legend');
+    editPriorityLegend.textContent = 'Priority';
+    
+    //edit high priority
+    let editPriorityHighLabel = document.createElement('label');
+    editPriorityHighLabel.setAttribute('for', 'highPriority' + numberId);
+    editPriorityHighLabel.textContent = 'High';
+    
+
+    let editPriorityHighInput = document.createElement('input');
+    editPriorityHighInput.setAttribute('type', 'radio');
+    editPriorityHighInput.setAttribute('id', 'highPriority' + numberId);
+    editPriorityHighInput.setAttribute('name', 'editPriorityVar');
+    
+    //edit medium priority
+    let editPriorityMediumLabel = document.createElement('label');
+    editPriorityMediumLabel.setAttribute('for', 'mediumPriority' + numberId);
+    editPriorityMediumLabel.textContent = 'Medium';
+    
+    let editPriorityMediumInput = document.createElement('input');
+    editPriorityMediumInput.setAttribute('type', 'radio');
+    editPriorityMediumInput.setAttribute('id', 'mediumPriority' + numberId);
+    editPriorityMediumInput.setAttribute('name', 'editPriorityVar');
+    //edit low priority
+    let editPriorityLowLabel = document.createElement('label'); 
+    editPriorityLowLabel.setAttribute('for', 'lowPriority' + numberId);
+    editPriorityLowLabel.textContent = 'Low';
+    
+    let editPriorityLowInput = document.createElement('input'); 
+    editPriorityLowInput.setAttribute('type', 'radio');
+    editPriorityLowInput.setAttribute('id', 'lowPriority' + numberId);
+    editPriorityLowInput.setAttribute('name', 'editPriorityVar');
+    //an if else statement to see which option needs to be checked to begin with
+    if (taskListFromStorage[numberId].priority === 'High') {
+        editPriorityHighInput.checked = true;
+    }
+    else if (taskListFromStorage[numberId].priority === 'Medium') {
+        editPriorityMediumInput.checked = true;
+    }
+    else if (taskListFromStorage[numberId].priority === 'Low') {
+        editPriorityLowInput.checked = true;
+    }
+    
+    //appending all the priority fields for the radio button
+    editPriorityDiv.appendChild(editPriorityLegend);
+    editPriorityHighDiv.appendChild(editPriorityHighLabel);
+    editPriorityHighDiv.appendChild(editPriorityHighInput);
+    editPriorityDiv.appendChild(editPriorityHighDiv);
+    editPriorityMediumDiv.appendChild(editPriorityMediumLabel);
+    editPriorityMediumDiv.appendChild(editPriorityMediumInput);
+    editPriorityDiv.appendChild(editPriorityMediumDiv);
+    editPriorityLowDiv.appendChild(editPriorityLowLabel);
+    editPriorityLowDiv.appendChild(editPriorityLowInput);
+    editPriorityDiv.appendChild(editPriorityLowDiv);
+    editTaskForm.appendChild(editPriorityDiv); 
+
+    //notes edit form
+    let editNotesDiv = document.createElement('div');
+    editNotesDiv.setAttribute('class', 'editNotesDiv');
+    let editNotesLabel = document.createElement('label');
+    editNotesLabel.setAttribute('for', 'editNotes' + numberId);
+    editNotesLabel.textContent = 'Notes: ';
+
+    let editNotesInput = document.createElement('textarea');
+    editNotesInput.setAttribute('type', 'text');
+    editNotesInput.setAttribute('id', 'editNotes' + numberId);
+    editNotesInput.setAttribute('name', 'editNotesVar');
+    editNotesInput.value = taskListFromStorage[numberId].notes;
+
+    editNotesDiv.appendChild(editNotesLabel);
+    editNotesDiv.appendChild(editNotesInput);
+    editTaskForm.appendChild(editNotesDiv);
+    
+    //Submit button for edit form
+    let editFormSubmit = document.createElement('div');
+
+    let editFormSubmitButton = document.createElement('button');
+    editFormSubmitButton.setAttribute('class', 'submitEditForm');
+    editFormSubmitButton.setAttribute('type', 'submit');
+    editFormSubmitButton.textContent = 'Edit Task';
+    editFormSubmit.appendChild(editFormSubmitButton);
+    editTaskForm.appendChild(editFormSubmit);
+    
+    //appending form to pop up div
+    popUpTaskEditContainer.appendChild(editTaskForm);
+}
