@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import './style.css';
-import { addFormButtonDomManipulation, submitFormButtonPressed, editTask } from './buttons';
+import { addFormButtonDomManipulation, submitFormButtonPressed, editTask, editSubmitButtonPressed } from './buttons';
 import { editTaskDomAdd, popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 
 
@@ -17,6 +17,7 @@ let deleteLog = document.querySelector('.deleteLog');
 let taskPopUpContainer = document.querySelector('.taskPopUpContainer');
 
 taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+
 
 taskDomAdd(taskListFromStorage);
 
@@ -116,6 +117,16 @@ addTaskButton.addEventListener('click', () => {
             taskPopUpContainer.classList.toggle('show');
             let editId = Number(event.target.id);
             editTask(editId);
+        }
+        else if (event.target && event.target.classList.contains('submitEditForm')) {
+            event.preventDefault();
+            let editId = Number(event.target.id);
+            editSubmitButtonPressed(editId);
+            taskPopUpContainer.classList.toggle('show');
+            let taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+            deleteTaskListHTML();
+            taskDomAdd(taskListFromStorage);
+            
         }
     });
 

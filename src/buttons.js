@@ -159,7 +159,6 @@ export function editTask (numberId) {
     popUpTaskInnerHtml();
     let popUpTaskEditContainer = document.querySelector('.popUpTask');
     let taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
-    console.log(taskListFromStorage[numberId].notes);
     let editTaskForm = document.createElement('form');
 
     //edit task input
@@ -221,6 +220,7 @@ export function editTask (numberId) {
     editPriorityHighInput.setAttribute('type', 'radio');
     editPriorityHighInput.setAttribute('id', 'highPriority' + numberId);
     editPriorityHighInput.setAttribute('name', 'editPriorityVar');
+    editPriorityHighInput.setAttribute('value', 'High');
     
     //edit medium priority
     let editPriorityMediumLabel = document.createElement('label');
@@ -231,6 +231,7 @@ export function editTask (numberId) {
     editPriorityMediumInput.setAttribute('type', 'radio');
     editPriorityMediumInput.setAttribute('id', 'mediumPriority' + numberId);
     editPriorityMediumInput.setAttribute('name', 'editPriorityVar');
+    editPriorityMediumInput.setAttribute('value', 'Medium');
     //edit low priority
     let editPriorityLowLabel = document.createElement('label'); 
     editPriorityLowLabel.setAttribute('for', 'lowPriority' + numberId);
@@ -240,6 +241,8 @@ export function editTask (numberId) {
     editPriorityLowInput.setAttribute('type', 'radio');
     editPriorityLowInput.setAttribute('id', 'lowPriority' + numberId);
     editPriorityLowInput.setAttribute('name', 'editPriorityVar');
+    editPriorityLowInput.setAttribute('value', 'Low');
+
     //an if else statement to see which option needs to be checked to begin with
     if (taskListFromStorage[numberId].priority === 'High') {
         editPriorityHighInput.checked = true;
@@ -286,6 +289,7 @@ export function editTask (numberId) {
 
     let editFormSubmitButton = document.createElement('button');
     editFormSubmitButton.setAttribute('class', 'submitEditForm');
+    editFormSubmitButton.setAttribute('id', numberId);
     editFormSubmitButton.setAttribute('type', 'submit');
     editFormSubmitButton.textContent = 'Edit Task';
     editFormSubmit.appendChild(editFormSubmitButton);
@@ -293,4 +297,31 @@ export function editTask (numberId) {
     
     //appending form to pop up div
     popUpTaskEditContainer.appendChild(editTaskForm);
+}
+
+export function editSubmitButtonPressed(numberId) {
+    let taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+    //changing the task
+    let task = document.getElementById('task' + numberId).value;
+    taskListFromStorage[numberId].task = task;
+
+    //changing the date
+    let date = document.getElementById('date' + numberId).value;
+    taskListFromStorage[numberId].dueDate = date;
+
+    //changing the priority
+    let radioButtons = document.querySelectorAll('input[type="radio"][name="editPriorityVar"]');
+    radioButtons.forEach ((radioButton) => {
+        if (radioButton.checked) {
+            let selectedValue = radioButton.value;
+            taskListFromStorage[numberId].priority = selectedValue;
+        }
+    })
+    //Changing the notes
+    let notes = document.getElementById('editNotes' + numberId).value;
+    taskListFromStorage[numberId].notes = notes;
+
+
+    localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
+    
 }
