@@ -105,6 +105,37 @@ export function addFormButtonDomManipulation() {
     notesDiv.appendChild(notes);
     addTaskForm.appendChild(notesDiv);
 
+    //category
+    let categoryDiv = document.createElement('div');
+    categoryDiv.setAttribute('class', 'categoryDiv');
+
+    let categoryLabel = document.createElement('label');
+    categoryLabel.setAttribute('for', 'category');
+    categoryLabel.textContent = 'Categories';
+
+    let categoryInput = document.createElement('select');
+    categoryInput.setAttribute('id', 'category');
+    
+    let none = document.createElement('option');
+    none.textContent = 'None';
+    categoryInput.appendChild(none);
+
+    let health = document.createElement('option');
+    health.textContent = 'Health';
+    categoryInput.appendChild(health);
+
+    let work = document.createElement('option');
+    work.textContent = 'Work';
+    categoryInput.appendChild(work);
+
+    let home = document.createElement('option');
+    home.textContent = 'Home';
+    categoryInput.appendChild(home);
+
+    categoryDiv.appendChild(categoryLabel);
+    categoryDiv.appendChild(categoryInput);
+    addTaskForm.appendChild(categoryDiv);
+
     //button
     let formButtonsDiv = document.createElement('div');
     formButtonsDiv.setAttribute('class', 'formButtonsDiv');
@@ -134,6 +165,9 @@ export function submitFormButtonPressed() {
             let due = document.getElementById('due').value;
             let priorityChecker = document.querySelector('input[name="priority"]:checked').value;
             let notesUpdate = document.getElementById('notes').value;
+            let category = document.getElementById('category').value;
+
+            
 
             
 
@@ -149,7 +183,7 @@ export function submitFormButtonPressed() {
             else { priority = null; }
             
            
-            let createdTask = new TaskObject(task, done, due, priority, notesUpdate);
+            let createdTask = new TaskObject(task, done, due, priority, notesUpdate, category);
             
             
             return createdTask;
@@ -324,4 +358,49 @@ export function editSubmitButtonPressed(numberId) {
 
     localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
     
+}
+
+
+export function assignTasksToCategories (taskList) {
+        let healthCategory = [];
+        let workCategory = [];
+        let homeCategory = [];
+       
+    taskList.forEach ((categories) => {
+        if (categories.category === 'None') {
+            console.log('All');
+        }
+        else if (categories.category === 'Health') {
+            healthCategory.push(categories);
+        }
+        else if (categories.category === 'Work') {
+            workCategory.push(categories);
+        }
+        else if (categories.category === 'Home') {
+            homeCategory.push(categories);
+        }
+    })
+    
+
+    localStorage.setItem('healthTaskList', JSON.stringify(healthCategory));
+    localStorage.setItem('workTaskList', JSON.stringify(workCategory));
+    localStorage.setItem('homeTaskList', JSON.stringify(homeCategory));
+}
+
+export function toggleCategoryButtonsColour () {
+    const buttons = document.querySelectorAll('.categoryButtons button');
+
+    let activeButton = null;
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            if(activeButton) {
+                activeButton.classList.remove('active');
+            }
+
+            button.classList.add('active');
+
+            activeButton = button;
+        })
+    })
 }

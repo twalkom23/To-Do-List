@@ -1,13 +1,20 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import './style.css';
-import { addFormButtonDomManipulation, submitFormButtonPressed, editTask, editSubmitButtonPressed } from './buttons';
+import { addFormButtonDomManipulation, submitFormButtonPressed, editTask, editSubmitButtonPressed, assignTasksToCategories, toggleCategoryButtonsColour } from './buttons';
 import { editTaskDomAdd, popUpTaskDomAdd, taskDomAdd } from './TaskDomManipulation';
 
 
 let addTaskButton = document.querySelector('.addButton');
+let allTaskButton = document.querySelector('.allCategory');
+let healthTaskButton = document.querySelector('.healthCategory');
+let workTaskButton = document.querySelector('.workCategory');
+let homeTaskButton = document.querySelector('.homeCategory');
 let newTask;
 
 let taskListFromStorage = [];
+let healthTaskListFromStorage = [];
+let workTaskListFromStorage = [];
+let homeTaskListFromStorage = [];
 let editLog = document.querySelector('.editLog');
 let taskLog = document.querySelector('.taskLog');
 let doneLog = document.querySelector('.doneLog');
@@ -55,13 +62,11 @@ addTaskButton.addEventListener('click', () => {
             taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
             taskListFromStorage.push(newTask);
 
-            
-
-            
            
             let removeForm = document.querySelector('form');
             removeForm.remove();
-            
+            assignTasksToCategories(taskListFromStorage);
+          
             taskDomAdd(taskListFromStorage);
             localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
             addTaskButton.disabled = false;
@@ -85,13 +90,14 @@ addTaskButton.addEventListener('click', () => {
                 
                 localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
                 taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+                assignTasksToCategories(taskListFromStorage);
                 taskDomAdd(taskListFromStorage);
             }
             else if (taskListFromStorage[toggleButtonInt].done === true) {
                 taskListFromStorage[toggleButtonInt].done = false;
                 localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
-                
                 taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+                assignTasksToCategories(taskListFromStorage);
                 taskDomAdd(taskListFromStorage);
             }
         }// Will delete a task when the delete button is pressed
@@ -100,6 +106,7 @@ addTaskButton.addEventListener('click', () => {
             taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
             taskListFromStorage.splice(deleteId, 1);
             deleteTaskListHTML();
+            assignTasksToCategories(taskListFromStorage);
             taskDomAdd(taskListFromStorage);
             localStorage.setItem('taskList', JSON.stringify(taskListFromStorage));
         }//will cause pop up window which displays all the info about the task
@@ -126,9 +133,40 @@ addTaskButton.addEventListener('click', () => {
             let taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
             deleteTaskListHTML();
             taskDomAdd(taskListFromStorage);
-            
         }
     });
+
+
+
+    //catergory buttons on top of webpage event listeners
+    allTaskButton.addEventListener('click', () => {
+        deleteTaskListHTML();
+        taskListFromStorage = JSON.parse(localStorage.getItem('taskList'));
+        taskDomAdd(taskListFromStorage);
+        toggleCategoryButtonsColour();
+    });
+    healthTaskButton.addEventListener('click', () => {
+        deleteTaskListHTML();
+        healthTaskListFromStorage = JSON.parse(localStorage.getItem('healthTaskList'));
+        taskDomAdd(healthTaskListFromStorage);
+        toggleCategoryButtonsColour();
+    });
+    workTaskButton.addEventListener('click', () => {
+        deleteTaskListHTML();
+        workTaskListFromStorage = JSON.parse(localStorage.getItem('workTaskList'));
+        taskDomAdd(workTaskListFromStorage);
+        toggleCategoryButtonsColour();
+    });
+    homeTaskButton.addEventListener('click', () => {
+        deleteTaskListHTML();
+        homeTaskListFromStorage = JSON.parse(localStorage.getItem('homeTaskList'));
+        taskDomAdd(homeTaskListFromStorage);
+        toggleCategoryButtonsColour();
+    });
+    
+
+
+
 
    
           
